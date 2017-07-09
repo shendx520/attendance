@@ -15,9 +15,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/index")
-    public String user(){
-
-        return "user";
+    @RequestMapping("/home")
+    public String home(){
+        return "home";
     }
 }

@@ -14,4 +14,11 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    /**
+     * 根据用户名取出用户
+     * @param username
+     * @return
+     */
+    User getUserByName(String username);
 }

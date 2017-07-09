@@ -21,18 +21,41 @@
                                 expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
+    <mvc:interceptors>
+        <!-- 拦截了所有请求-->
+        <bean class="com.kay.common.interceptor.LoginInterceptor"/>
+    </mvc:interceptors>
+
+
+    <!-- todo 配置fastjson的转换器-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <!-- todo 默认字符串不要转换成json-->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
     <mvc:annotation-driven/>
-
-
     <!--todo 以下2种写法
             1.静态资源默认servlet配置:
             1)加入对静态资源的处理
             2）允许使用"/"做整体映射
         -->
-    <!--<mvc:default-servlet-handler/>-->
+    <mvc:default-servlet-handler/>
 
     <!-- todo 2.静态资源处理， css， js， imgs -->
     <mvc:resources mapping="/static/**" location="/static/" />
+
+
 
     <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
         <property name="resourceLoaderPath" value="/WEB-INF/views"/>

@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 public class SecurityUitils {
 
     //密码加密
-    public String encryptPassword(String pwd) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+    public static String encryptPassword(String pwd) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         MessageDigest md5=MessageDigest.getInstance("md5");
         BASE64Encoder base64Encoder=new BASE64Encoder();
         //md5加密之后可能会产生乱码，因为要存入数据库，所以外面还有加一层
@@ -21,7 +21,7 @@ public class SecurityUitils {
     }
 
     //密码验证
-    public boolean checkPassword(String inputPwd,String dbPwd) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public static boolean checkPassword(String inputPwd,String dbPwd) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String pwd=encryptPassword(inputPwd);
         if(!pwd.equals(dbPwd)){
             return false;
